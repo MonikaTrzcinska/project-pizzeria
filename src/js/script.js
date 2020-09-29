@@ -53,8 +53,8 @@
   };
 
 
-  class Product{
-    constructor(id, data){
+  class Product {
+    constructor(id, data) {
       const thisProduct = this;
       thisProduct.id = id;
       thisProduct.data = data;
@@ -64,7 +64,7 @@
       console.log('new Product:', thisProduct);
     }
 
-    renderInMenu(){
+    renderInMenu() {
       const thisProduct = this;
       /* generate HTML based on template */
       const generatedHTML = templates.menuProduct(thisProduct.data);
@@ -79,7 +79,7 @@
       menuContainer.appendChild(thisProduct.element);
     }
 
-    getElements(){
+    getElements() {
       const thisProduct = this;
 
       thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
@@ -94,15 +94,15 @@
       console.log('thisProduct.priceElem:', thisProduct.priceElem);
     }
 
-    initAccordion(){
+    initAccordion() {
       const thisProduct = this;
       /* find the clickable trigger (the element that should react to clicking) */
       const trigger = document.querySelector(select.menuProduct.clickable);
       console.log('clickable trigger:', trigger);
       /* START: click event listener to trigger */
-      thisProduct.element.addEventListener('click', function(event){
-//jak zamiast thisProduct.element wpiszę trigger, to wyświetla się tylko jeden produkt w menu na stronie
-//a w konsoli pisze, że trigger.addEvent Listener is not a function
+      thisProduct.element.addEventListener('click', function (event) {
+        //jak zamiast thisProduct.element wpiszę trigger, to wyświetla się tylko jeden produkt w menu na stronie
+        //a w konsoli pisze, że trigger.addEvent Listener is not a function
         console.log('Trigger clicked');
 
         /* prevent default action for event*/
@@ -116,38 +116,38 @@
         const allActiveProducts = document.querySelectorAll('article.active');
         console.log('allActiveProducts:', allActiveProducts);
         /* START LOOP: for each active product */
-        for (let activeProduct of allActiveProducts){
+        for (let activeProduct of allActiveProducts) {
           /* START: if the active product isn't the element of thisProduct */
-          if(activeProduct != this){
+          if (activeProduct != this) {
             /* remove class active for the active product */
             activeProduct.classList.remove('active');
-          /* END: if the active product isn't the element of thisProduct */
+            /* END: if the active product isn't the element of thisProduct */
           }
-        /* END LOOP: for each active product */
+          /* END LOOP: for each active product */
         }
-      /* END: click event listener to trigger */
+        /* END: click event listener to trigger */
       });
     }
   }
 
   const app = {
-    initMenu: function(){
+    initMenu: function () {
       const thisApp = this;
 
       console.log('thisApp.data:', thisApp.data);
 
-      for(let productData in thisApp.data.products){
+      for (let productData in thisApp.data.products) {
         new Product(productData, thisApp.data.products[productData]);
       }
     },
 
-    initData: function(){
-      const thisApp=this;
+    initData: function () {
+      const thisApp = this;
 
       thisApp.data = dataSource;
     },
 
-    init: function(){
+    init: function () {
       const thisApp = this;
       console.log('*** App starting ***');
       console.log('thisApp:', thisApp);
