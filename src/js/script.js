@@ -188,7 +188,7 @@
         /* END LOOP: for each paramId in thisProduct.data.params */
       }
       /* multiply price by amount */
-      //price *= thisProduct.amountWidget.value;
+      price *= thisProduct.amountWidget.value;
 
       /* set the contents of thisProduct.priceElem to be the value of variable price */
       thisProduct.priceElem.innerHTML = price;
@@ -196,8 +196,11 @@
 
     initAmountWidget() {
       const thisProduct = this;
-      thisProduct.amountWidgetElem.addEventListener('updated', thisProduct.processOrder());
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+      thisProduct.amountWidgetElem.addEventListener('updated', function () {
+        thisProduct.processOrder();
+      });
+
     }
   }
 
