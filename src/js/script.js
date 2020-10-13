@@ -324,7 +324,7 @@
       thisCart.dom = {};
       thisCart.dom.wrapper = element;
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
-      thisCart.dom.productList = document.querySelector(select.containerOf.cart);
+      thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
       // console.log('productList:', thisCart.dom.productList);
       thisCart.renderTotalsKeys = ['totalNumber', 'totalPrice', 'subtotalPrice', 'deliveryFee'];
 
