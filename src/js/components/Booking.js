@@ -1,5 +1,4 @@
 import { select, templates } from '../settings.js';
-import { utils } from '../utils.js';
 import AmountWidget from './AmountWidget.js';
 
 class Booking {
@@ -10,16 +9,16 @@ class Booking {
 
   }
 
-  render() {
+  render(wrapper) {
     const thisBooking = this;
     /* generować kod HTML za pomocą szablonu templates.bookingWidget bez podawanie mu jakiegokolwiek argumentu */
     const generatedHTML = templates.bookingWidget();
     /* tworzyć pusty obiekt thisBooking.dom */
     thisBooking.dom = {};
     /*zapisywać do tego obiektu właściwość wrapper równą otrzymanemu argumentowi */
-    thisBooking.dom.wrapper = thisBooking.element;
+    thisBooking.dom.wrapper = wrapper;
     /*zawartość wrappera zamieniać na kod HTML wygenerowany z szablonu */
-    thisBooking.dom.wrapper = utils.createDOMFromHTML(generatedHTML);
+    thisBooking.dom.wrapper.innerHTML = generatedHTML;
     /*we właściwości thisBooking.dom.peopleAmount zapisywać pojedynczy element znaleziony we wrapperze i pasujący do selektora select.booking.peopleAmount */
     thisBooking.dom.peopleAmount = thisBooking.dom.wrapper.querySelector(select.booking.peopleAmount);
     /*analogicznie do peopleAmount znaleźć i zapisać element dla hoursAmount */
