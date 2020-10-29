@@ -31,8 +31,11 @@ class DatePicker extends BaseWidget {
       locale: {
         firstDayOfWeek: 1 // start week on Monday
       },
-      // instance.config.onChange.push(function() { } ),
+      onChange: function (selectedDates, dateStr, thisWidget) {
+        thisWidget.value = dateStr;
+      },
     });
+    console.log('thisWidget value:', thisWidget.value);
   }
 
   parseValue(value) {
