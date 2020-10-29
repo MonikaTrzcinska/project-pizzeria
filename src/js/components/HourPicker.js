@@ -25,23 +25,20 @@ class HourPicker extends BaseWidget {
 
   }
 
-  parseValue() {
-    const thisWidget = this;
-    const pickedHour = utils.numberToHour(thisWidget.value);
+  parseValue(value) {
+    //const thisWidget = this;
+    //const pickedHour = utils.numberToHour(value);
     // console.log('picked hour', pickedHour);
-    return pickedHour;
+    return utils.numberToHour(value);
   }
 
   isValid() {
-    const thisWidget = this;
-    thisWidget.isValid = true;
-    // console.log(thisWidget.isValid);
-    return thisWidget.isValid;
+    return true;
   }
 
   renderValue() {
     const thisWidget = this;
-    thisWidget.dom.output = thisWidget.value;
+    thisWidget.dom.output.innerHTML = thisWidget.value;
     // console.log('output:', thisWidget.dom.output);
   }
 }
