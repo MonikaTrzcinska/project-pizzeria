@@ -11,7 +11,7 @@ class BaseWidget {
     return thisWidget.correctValue;
   }
 
-  set value(value) {
+  set value(value) {    // setter
     const thisWidget = this;
     const newValue = thisWidget.parseValue(value);
 
@@ -51,7 +51,7 @@ class BaseWidget {
       bubbles: true
     });
     thisWidget.dom.wrapper.dispatchEvent(event);
-    //console.log('announce');
+    console.log('announce');
   }
 }
 

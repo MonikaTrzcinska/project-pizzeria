@@ -3,6 +3,8 @@ import { utils } from '../utils.js';
 import AmountWidget from './AmountWidget.js';
 import DatePicker from './DatePicker.js';
 import HourPicker from './HourPicker.js';
+import TablePicker from './TablePicker.js';
+
 
 class Booking {
   constructor(wrapper) {
@@ -10,7 +12,6 @@ class Booking {
     thisBooking.render(wrapper);
     thisBooking.initWidgets();
     thisBooking.getData();
-
   }
 
   getData() {   // pobiera dane z API
@@ -34,20 +35,18 @@ class Booking {
         endDateParam,
       ],
     };
-    // console.log('getData params', params);
 
     const urls = {
+      // http://localhost:3131/booking?date_gte=2019-01-01&date_lte=2019-12-31
       booking: settings.db.url + '/' + settings.db.booking
         + '?' + params.booking.join('&'),
-      // http://localhost:3131/booking?...
+      // http://localhost:3131/event?repeat=false&date_gte=2019-01-01&date_lte=2019-12-31
       eventsCurrent: settings.db.url + '/' + settings.db.event
         + '?' + params.eventsCurrent.join('&'),
-      // http://localhost:3131/event?...
+      // http://localhost:3131/event?repeat_ne=false&date_lte=2019-12-31
       eventsRepeat: settings.db.url + '/' + settings.db.event
         + '?' + params.eventsRepeat.join('&'),
-      // http://localhost:3131/event?...
     };
-    // console.log('getData urls', urls);
 
     Promise.all([
       fetch(urls.booking),
@@ -137,6 +136,7 @@ class Booking {
 
     for (let table of thisBooking.dom.tables) {
       let tableId = table.getAttribute(settings.booking.tableIdAttribute);
+      table.classList.remove(classNames.booking.tableSelected);
       if (!isNaN(tableId)) {
         tableId = parseInt(tableId);
       }
@@ -179,10 +179,14 @@ class Booking {
     thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
     thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
     thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
+    thisBooking.tablePicker = new TablePicker(thisBooking.dom.tablePicker);
 
     thisBooking.dom.wrapper.addEventListener('updated', function () {
       thisBooking.updateDOM();
     });
+    //thisBooking.dom.tablePickier.addEventListener('click', function () {
+    //  thisBooking.chooseTable();
+    //});
   }
 }
 

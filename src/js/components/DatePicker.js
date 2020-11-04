@@ -1,7 +1,7 @@
 /* global flatpickr */
 
 import BaseWidget from './BaseWidget.js';
-import { select, settings } from '../settings.js';
+import { select, settings, classNames } from '../settings.js';
 import { utils } from '../utils.js';
 
 class DatePicker extends BaseWidget {
@@ -33,6 +33,10 @@ class DatePicker extends BaseWidget {
       },
       onChange: function (selectedDates, dateStr, thisWidget) {
         thisWidget.value = dateStr;
+        const tables = document.querySelectorAll(select.booking.tables);
+        for (let table of tables) {
+          table.classList.remove(classNames.booking.tableSelected);
+        }
       },
     });
     console.log('thisWidget value:', thisWidget.value);
