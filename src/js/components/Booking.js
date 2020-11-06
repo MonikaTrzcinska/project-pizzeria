@@ -153,6 +153,54 @@ class Booking {
     }
   }
 
+  /*getStarters() {
+    const thisBooking = this;
+    thisBooking.starters = [];
+    const checks = document.queryselectorAll([name = starter]);
+    for (let check of checks) {
+      if (check.checked) {
+        thisBooking.starters.push = [check.value];
+      }
+    }
+  } */
+
+  sendBooking() {
+    const thisBooking = this;
+    //const url = settings.db.url + '/' + settings.db.booking;
+    thisBooking.dom.address = thisBooking.dom.wrapper.querySelector(select.cart.address);
+    thisBooking.dom.phone = thisBooking.dom.wrapper.querySelector(select.cart.phone);
+    thisBooking.dom.hours = thisBooking.dom.wrapper.querySelector(select.booking.hours);
+    thisBooking.dom.people = thisBooking.dom.wrapper.querySelector(select.booking.people);
+
+    const payload = {
+      address: thisBooking.dom.address.value,
+      phone: thisBooking.dom.phone.value,
+      date: thisBooking.datePicker.value,
+      hour: thisBooking.hourPicker.value,
+      people: thisBooking.dom.people.value,
+      duration: thisBooking.dom.hours.value,
+      tableId: thisBooking.tablePicker.value,
+      starters: thisBooking.starters,
+    };
+    console.log('booking send:', payload);
+
+    /*const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    };
+
+    fetch(url, options)
+      .then(function (responese) {
+        return responese.json();
+      })
+      .then(function (parsedResponse) {
+        console.log('parsedResponse for booking', parsedResponse);
+      });*/
+  }
+
   render(wrapper) {
     const thisBooking = this;
     /* generować kod HTML za pomocą szablonu templates.bookingWidget bez podawanie mu jakiegokolwiek argumentu */
@@ -171,6 +219,7 @@ class Booking {
     thisBooking.dom.datePicker = thisBooking.dom.wrapper.querySelector(select.widgets.datePicker.wrapper);
     thisBooking.dom.hourPicker = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper);
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
+    thisBooking.dom.submit = thisBooking.dom.wrapper.querySelector('.booking-form');
   }
 
   initWidgets() {
@@ -181,12 +230,15 @@ class Booking {
     thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
     thisBooking.tablePicker = new TablePicker(thisBooking.dom.tablePicker);
 
+    thisBooking.dom.submit.addEventListener('submit', function (event) {
+      event.preventDefault;
+      thisBooking.sendBooking();
+    });
+
     thisBooking.dom.wrapper.addEventListener('updated', function () {
       thisBooking.updateDOM();
     });
-    //thisBooking.dom.tablePickier.addEventListener('click', function () {
-    //  thisBooking.chooseTable();
-    //});
+
   }
 }
 

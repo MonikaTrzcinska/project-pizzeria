@@ -44,7 +44,7 @@ export const select = {
   cart: {
     productList: '.cart__order-summary',
     toggleTrigger: '.cart__summary',
-    totalNumber: `.cart__total-number`,
+    totalNumber: '.cart__total-number',
     totalPrice: '.cart__total-price strong, .cart__order-total .cart__order-price-sum strong',
     subtotalPrice: '.cart__order-subtotal .cart__order-price-sum strong',
     deliveryFee: '.cart__order-delivery .cart__order-price-sum strong',
@@ -63,6 +63,8 @@ export const select = {
     peopleAmount: '.people-amount',
     hoursAmount: '.hours-amount',
     tables: '.floor-plan .table',
+    hours: '[name="hours"]',
+    people: '[name="people"]',
   },
   nav: {
     links: '.main-nav a',

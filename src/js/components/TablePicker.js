@@ -14,29 +14,28 @@ class TablePicker {
     console.log('choose table widget', thisWidget);
     thisWidget.dom.tables = document.querySelectorAll(select.booking.tables);
     console.log('stoliki:', thisWidget.dom.tables);
+    thisWidget.value = [];
 
     for (let table of thisWidget.dom.tables) {
       let tableId = table.getAttribute(settings.booking.tableIdAttribute);
       table.addEventListener('click', function () {
         if (table.classList.contains(classNames.booking.tableBooked)) {
-          console.log('this table is booked already:', tableId);
+          console.log('this table is already booked:', tableId);
         }
         else {
-          table.classList.add(classNames.booking.tableSelected);
-          console.log('chosen table:', tableId);
+          table.classList.toggle(classNames.booking.tableSelected);
+          if (table.classList.contains(classNames.booking.tableSelected)) {
+            thisWidget.value.push(tableId);
+            console.log('chosen tables:', thisWidget.value);
+          }
+          else {
+            const IndexOfRemovedTable = thisWidget.value.indexOf(tableId);
+            thisWidget.value.splice(IndexOfRemovedTable, 1);
+            console.log('chosen tables:', thisWidget.value);
+          }
         }
       });
     }
-
-    //for (let table of thisBooking.dom.tables) {
-    //let tableId = table.getAttribute(settings.booking.tableIdAttribute);
-    //if (!isNaN(tableId)) {
-    //tableId = parseInt(tableId);
-    //};
-    //table.addEventListener('click', function () {
-    //table.classList.add(classNames.booking.tableBooked);
-    //});
-    //}
   }
 
 }
