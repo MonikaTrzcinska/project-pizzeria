@@ -1,7 +1,7 @@
 /* global flatpickr */
 
 import BaseWidget from './BaseWidget.js';
-import { select, settings, classNames } from '../settings.js';
+import { select, settings } from '../settings.js';
 import { utils } from '../utils.js';
 
 class DatePicker extends BaseWidget {
@@ -31,28 +31,28 @@ class DatePicker extends BaseWidget {
       locale: {
         firstDayOfWeek: 1 // start week on Monday
       },
-      onChange: function (selectedDates, dateStr, thisWidget) {
+      onChange: function (selectedDates, dateStr) {
         thisWidget.value = dateStr;
-        const tables = document.querySelectorAll(select.booking.tables);
-        for (let table of tables) {
-          table.classList.remove(classNames.booking.tableSelected);
-        }
-        //console.log('thisWidget value changed:', thisWidget.value);
-      },
-    });
+        // to trzeba usunąć:
+        //  const tables = document.querySelectorAll(select.booking.tables);
+        //  for (let table of tables) {
+        //    table.classList.remove(classNames.booking.tableSelected);
+      }
+      //console.log('thisWidget value changed:', thisWidget.value);
+    }
+    );
     //console.log('thisWidget value:', thisWidget.value);
   }
 
   parseValue(value) {
-    const thisWidget = this;
-    thisWidget.value = value;
+    return value;
   }
 
   isValid() {
-    const thisWidget = this;
-    thisWidget.isValid = true;
-    return thisWidget.isValid;
+    return true;
   }
+
+  renderValue() { }
 }
 
 export default DatePicker;

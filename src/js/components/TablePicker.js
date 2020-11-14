@@ -11,9 +11,9 @@ class TablePicker {
 
   chooseTable() {
     const thisWidget = this;
-    console.log('choose table widget', thisWidget);
+    //console.log('choose table widget', thisWidget);
     thisWidget.dom.tables = document.querySelectorAll(select.booking.tables);
-    console.log('stoliki:', thisWidget.dom.tables);
+    //console.log('stoliki:', thisWidget.dom.tables);
     thisWidget.value = [];
 
     for (let table of thisWidget.dom.tables) {
