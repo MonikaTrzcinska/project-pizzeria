@@ -25,7 +25,6 @@ class BaseWidget {
 
   setValue(value) {
     const thisWidget = this;
-
     thisWidget.value = value;
   }
 

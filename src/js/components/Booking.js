@@ -119,11 +119,17 @@ class Booking {
     }
   }
 
+  clearTables() {
+    const thisBooking = this;
+    thisBooking.tablePicker.clearTables();
+  }
+
   updateDOM() {
     const thisBooking = this;
 
     thisBooking.date = thisBooking.datePicker.value;
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
+    thisBooking.clearTables();
 
     let allAvailable = false;
 
@@ -137,7 +143,6 @@ class Booking {
 
     for (let table of thisBooking.dom.tables) {
       let tableId = table.getAttribute(settings.booking.tableIdAttribute);
-      table.classList.remove(classNames.booking.tableSelected);
       if (!isNaN(tableId)) {
         tableId = parseInt(tableId);
       }
@@ -164,11 +169,6 @@ class Booking {
     }
   }
 
-  clearTables() {
-    const thisBooking = this;
-    thisBooking.tablePicker.value = [];
-  }
-
   sendBooking() {
     const thisBooking = this;
     const url = settings.db.url + '/' + settings.db.booking;
@@ -184,7 +184,7 @@ class Booking {
       hour: thisBooking.hourPicker.value,
       people: thisBooking.dom.people.value,
       duration: thisBooking.dom.hours.value,
-      tableId: thisBooking.tablePicker.value,
+      table: thisBooking.tablePicker.value,
       starters: thisBooking.starters,
     };
 
@@ -202,10 +202,11 @@ class Booking {
       })
       .then(function (parsedResponse) {
         console.log('parsedResponse for booking', parsedResponse);
+        thisBooking.makeBooked(payload.date, payload.hour, payload.duration, payload.table);
+        //thisBooking.clearTables();
+        thisBooking.updateDOM();
       });
-    thisBooking.makeBooked(payload.date, payload.hour, payload.duration, payload.tableId);
-    //thisBooking.clearTables();
-    thisBooking.updateDOM();
+
 
   }
 
@@ -241,12 +242,15 @@ class Booking {
     thisBooking.dom.submit.addEventListener('submit', function (event) {
       event.preventDefault();
       thisBooking.sendBooking();
-      thisBooking.clearTables();
     });
 
-    thisBooking.dom.wrapper.addEventListener('updated', function () {
+    //thisBooking.dom.wrapper.addEventListener('updated', function () {
+    //  thisBooking.updateDOM();
+    //});
+
+    thisBooking.dom.wrapper.querySelector('.time-picker').addEventListener('updated', function () {
       thisBooking.updateDOM();
-      thisBooking.clearTables();
+      // to do table picker
     });
 
   }

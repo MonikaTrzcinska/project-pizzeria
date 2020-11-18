@@ -7,7 +7,7 @@ class AmountWidget extends BaseWidget {
 
     const thisWidget = this;
     thisWidget.getElements(element);
-    //thisWidget.dom.input.value = settings.amountWidget.defaultValue;
+    thisWidget.dom.input.value = settings.amountWidget.defaultValue;
     //thisWidget.setValue(thisWidget.dom.input.value);
 
     thisWidget.initActions();
@@ -21,18 +21,6 @@ class AmountWidget extends BaseWidget {
     thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(select.widgets.amount.input);
     thisWidget.dom.linkDecrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkDecrease);
     thisWidget.dom.linkIncrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkIncrease);
-  }
-
-  setValue(value) {
-    const thisWidget = this;
-    const newValue = thisWidget.parseValue(value);
-
-    /* TODO: Add validation */
-    if (newValue != thisWidget.value && thisWidget.isValid(newValue)) {
-      thisWidget.value = newValue;
-      thisWidget.announce();
-    }
-    thisWidget.renderValue();
   }
 
   isValid(value) {

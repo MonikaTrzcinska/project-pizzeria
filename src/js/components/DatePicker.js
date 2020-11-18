@@ -33,15 +33,9 @@ class DatePicker extends BaseWidget {
       },
       onChange: function (selectedDates, dateStr) {
         thisWidget.value = dateStr;
-        // to trzeba usunąć:
-        //  const tables = document.querySelectorAll(select.booking.tables);
-        //  for (let table of tables) {
-        //    table.classList.remove(classNames.booking.tableSelected);
       }
-      //console.log('thisWidget value changed:', thisWidget.value);
     }
     );
-    //console.log('thisWidget value:', thisWidget.value);
   }
 
   parseValue(value) {
