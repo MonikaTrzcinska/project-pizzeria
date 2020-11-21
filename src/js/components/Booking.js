@@ -78,12 +78,12 @@ class Booking {
     thisBooking.booked = {};
 
     for (let item of bookings) {
-      thisBooking.makeBooked(item.data, item.hour, item.duration, item.table);
+      thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
     }
 
 
     for (let item of eventsCurrent) {
-      thisBooking.makeBooked(item.data, item.hour, item.duration, item.table);
+      thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
     }
 
     const minDate = thisBooking.datePicker.minDate;
